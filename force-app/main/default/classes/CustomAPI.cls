@@ -11,5 +11,4 @@ global with sharing class CustomAPI {
         }
         return ids;
     }
-
 }
