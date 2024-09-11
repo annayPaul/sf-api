@@ -15,17 +15,28 @@ global with sharing class CustomAPI {
         else{
             List<Account> accounts = [SELECT Id, Name, Industry, NumberOfEmployees, Phone, ShippingAddress, ShippingCity, ShippingCountry, ShippingState, Type, Website FROM Account WHERE Id = :pathParams LIMIT 1];
             Account acc = accounts[0];
-            result += 'Name: ' + acc.Name + '\n\r';
-            result += 'Industry: ' + acc.Industry + '\n\r';
-            result += 'Number of Employees: ' + acc.NumberOfEmployees + '\n\r';
-            result += 'Phone Number: ' + acc.Phone + '\n\r';
-            result += 'Shipping Address: ' + acc.ShippingAddress + '\n\r';
-            result += 'Shipping City: ' + acc.ShippingCity + '\n\r';
-            result += 'Shipping Country: ' + acc.ShippingCountry + '\n\r';
-            result += 'Shipping State: ' + acc.ShippingState + '\n\r';
-            result += 'Type: ' + acc.Type + '\n\r';
-            result += 'Website: ' + acc.Website + '\n\r';
+            result += 'Name: ' + acc.Name + '   ';
+            result += 'Industry: ' + acc.Industry + '   ';
+            result += 'Number of Employees: ' + acc.NumberOfEmployees + '   ';
+            result += 'Phone Number: ' + acc.Phone + '   ';
+            result += 'Shipping Address: ' + acc.ShippingAddress + '   ';
+            result += 'Shipping City: ' + acc.ShippingCity + '   ';
+            result += 'Shipping Country: ' + acc.ShippingCountry + '   ';
+            result += 'Shipping State: ' + acc.ShippingState + '   ';
+            result += 'Type: ' + acc.Type + '   ';
+            result += 'Website: ' + acc.Website + '   ';
         }
         return result;
+    }
+
+    @HttpPost
+    global static String doPost(String name, String phone, String industry, Integer numberOfEmployees){
+        Account account = new Account();
+        account.Name = name;
+        account.phone = phone;
+        account.industry = industry;
+        account.numberOfEmployees = numberOfEmployees;
+        insert account;
+        return account.Id;
     }
 }
